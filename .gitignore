@@ -1,0 +1,4 @@
+# Logs
+node_modules
+#Ignore NOTE.md file
+NOTE.md
