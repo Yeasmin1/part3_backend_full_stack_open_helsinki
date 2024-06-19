@@ -2,13 +2,17 @@
 //side code we write it like this "import http from 'http")
 //const http = require("http")
 const express = require('express');
-const morgan = require('morgan'); //importing express, which this time is a function that is used to create an Express application stored in the app variable:
+const morgan = require('morgan');
+//importing express, which this time is a function that is used to create an Express application stored in the app variable:
 const cors = require('cors')
+//To make Express show static content, the page index.html and the JavaScript, etc., it fetches, we need a built-in middleware from Express called static.
+
 
 const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json())
 app.use(cors())
+app.use(express.static('dist')) 
 const generateId = () => {
   return Math.floor(Math.random() * 1000000)
 }
