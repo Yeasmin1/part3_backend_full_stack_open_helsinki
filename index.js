@@ -11,8 +11,8 @@ const cors = require('cors')
 const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json())
-app.use(cors())
 app.use(express.static('dist')) 
+app.use(cors())
 const generateId = () => {
   return Math.floor(Math.random() * 1000000)
 }
