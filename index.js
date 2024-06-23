@@ -70,11 +70,6 @@ let persons =
     //response.end(JSON.stringify(persons))
   //})
 
-  app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-
 app.get('/api/persons',(request, response) =>{
   console.log("/api/persons get")
   response.json(persons)
