@@ -35,13 +35,11 @@ app.get('/api/persons',(request, response) =>{
   if (body === undefined){
     return response.status(400).json({error: 'content missing'})
   }
-  const person = new Person({
-    name: body.name,
-    number: body.number 
+
+  Person.find.then(showData =>{
+    response.json(showData)
   })
-  person.save().then(savedPerson => {
-    response.json(savedPerson)
-  })
+ 
 })
 
 app.get('/api/persons/:id', (request, response) => { 
