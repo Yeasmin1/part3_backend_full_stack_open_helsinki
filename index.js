@@ -36,7 +36,7 @@ app.get('/api/persons',(request, response) =>{
     return response.status(400).json({error: 'content missing'})
   }
 
-  Person.find.then(showData =>{
+  Person.find().then(showData =>{
     response.json(showData)
   })
  
