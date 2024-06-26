@@ -19,6 +19,7 @@ const requestLogger = (request, response, next) => {
 }
 app.use(requestLogger)
 let persons = [
+  
 ]
 
 const unknownEndpoint = (request, response)=>{
@@ -31,7 +32,7 @@ app.get('/', (request, response)=>{
 })
 app.get('/api/persons',(request, response) =>{
   const body = request.body
-  if (body.content === undefined){
+  if (body === undefined){
     return response.status(400).json({error: 'content missing'})
   }
   const person = new Person({
@@ -51,7 +52,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', (request, response) =>{
   const body = request.body;
-  if (body.content === undefined){
+  if (body === undefined){
     return response.status(400).json({error: 'content missing'})
   }
   const person = new Person({
