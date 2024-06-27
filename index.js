@@ -28,18 +28,18 @@ const unknownEndpoint = (request, response)=>{
 }
 app.get('/', (request, response)=>{
   response.send('<h1>Hello World</h1>')
-
 })
-app.get('/api/persons',(request, response) =>{
-  const body = request.body
-  if (body === undefined){
-    return response.status(400).json({error: 'content missing'})
-  }
 
-  Person.find().then(showData =>{
-    response.json(showData)
-  })
- 
+app.get('/api/persons',(request, response) =>{
+ try{
+  console.log('Received request for /api/persons')
+  const persons = Person.find()
+  console.log('Retrieved persons:', persons)
+  response.json(persons)
+ } catch (error){
+  console.log('Error retrieving persons:', error.message)
+  response.status(500).json({message: error.message})
+ }
 })
 
 app.get('/api/persons/:id', (request, response) => { 
