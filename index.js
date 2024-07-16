@@ -3,7 +3,16 @@ const app = express()
 require('dotenv').config()
 
 const Person = require('./models/person')
-
+const initialPersons = [
+  {
+      "name": "Farida",
+      "number": "09-1234556"
+  },
+  {
+      "name": "Yeasmin",
+      "number": "05-1234556"
+  }
+]
 app.use(express.static('dist'))
 
 const requestLogger = (request, response, next) => {
@@ -38,11 +47,22 @@ app.get('/', (request, response) => {
   response.send('<h1>Hello World</h1>')
 })
 
-app.get('/api/persons',(request, response) => {
-  Person.find({}).then (persons => {
-    response.json(persons)
+app.get('/api/persons', (request, response) => {
+  Person.countDocuments().then((personCount) => {
+      if (personCount === 0) {
+          Person.insertMany(initialPersons).then(() => {
+              Person.find().then((data) => {
+                  response.json(data);
+              })
+          })
+      } else {
+          Person.find().then((data) => {
+              response.json(data);
+          })
+      }
   })
-})
+});
+
 
 app.post('/api/persons', (request, response, next) => {
   const { name, number } = request.body
